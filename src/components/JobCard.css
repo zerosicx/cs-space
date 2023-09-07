@@ -1,0 +1,9 @@
+.job-card__container {
+    
+}
+
+.job-card__card {
+    background-color: lightgrey;
+    border-radius: 8px;
+    height: 300px;
+}
