@@ -14,7 +14,7 @@ const JobCard = (props: Props) => {
     const { name, id, locations, company} = props;
 
   return (
-    <div className="job-card__container col-3 my-4">
+    <div className="job-card__container col-md-4 col-lg-3 col-sm-12 my-2">
         <div className="job-card__card px-4 py-4">
             <h4>{name}</h4>    
             <p>{id}</p>
