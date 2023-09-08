@@ -13,12 +13,21 @@ const Login: React.FC<LoginProps>= ({loggedIn, setLoggedIn}) => {
 
   const nav = useNavigate();
 
+  const closeNavbar = () => {
+  const navbar = document.querySelector('.navbar-collapse');
+    if (navbar?.classList.contains('show')) {
+      navbar.classList.remove('show');
+    }
+  };
+
   Hub.listen('auth', (data) => {
       if (data.payload.event === "signIn"){
         setLoggedIn(true);
         nav('/');
+        closeNavbar();
       } else {
         setLoggedIn(false);
+        closeNavbar();
       }
   })
 

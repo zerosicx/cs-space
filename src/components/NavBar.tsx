@@ -34,7 +34,7 @@ const NavBar: React.FC<NavBarProps> = ({ loggedIn  }) => {
                     <a className='nav-link text-white' href='/about'>About</a>
                 </li>
                 { loggedIn &&
-                    <section>
+                    <>
                     <li className='nav-item'>
                     <a className='nav-link text-white' href='/jobs'>Jobs</a>
                     </li>
@@ -47,7 +47,7 @@ const NavBar: React.FC<NavBarProps> = ({ loggedIn  }) => {
                     <li className='nav-item'>
                         <button onClick={handleSignOut}className="btn btn-light">Logout</button>
                     </li>
-                </section>
+                </>
                 }
                 { !loggedIn && 
                     <li className='nav-item'>
