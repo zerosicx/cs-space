@@ -10,7 +10,6 @@ import NavBar from './components/NavBar';
 import Login from './pages/Login';
 
 function App() {
-
   const [ loggedIn, setLoggedIn ] = useState<boolean>(false);
 
   return (
