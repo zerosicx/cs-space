@@ -1,14 +1,11 @@
-.job-card__container {
-    
-}
+@import '../utilties/colours.css';
 
 .job-card__card {
-    background-color: lightgrey;
     border-radius: 8px;
-    height: 250px;
+    height: 240px;
     overflow: hidden;
 }
 
 .job-card__card:hover {
-    background-color: darksalmon;
+    background-color: var(--gray-400) !important;
 }
