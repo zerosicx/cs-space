@@ -1,10 +1,16 @@
 import React from 'react'
 import './NavBar.css';
 import waikatoLogo from '../utilties/University_of_Waikato_logo.png'
+import { useNavigate } from 'react-router-dom';
 
-type Props = {}
+interface NavBarProps {
+    loggedIn: boolean;
+    setLoggedIn: (loggedIn: boolean) => void;
+}
 
-const NavBar = (props: Props) => {
+const NavBar: React.FC<NavBarProps> = ({ loggedIn, setLoggedIn }) => {
+
+    const nav = useNavigate();
   return (
      <nav className="navbar navbar-expand-sm navbar-dark px-3 sticky-top waikato-nav">
         <a className="navbar-brand text-white" href="/">
@@ -21,15 +27,27 @@ const NavBar = (props: Props) => {
                 <li className='nav-item'>
                     <a className='nav-link text-white' href='/about'>About</a>
                 </li>
-                <li className='nav-item'>
+                { loggedIn &&
+                    <section>
+                    <li className='nav-item'>
                     <a className='nav-link text-white' href='/jobs'>Jobs</a>
-                </li>
-                <li className='nav-item'>
-                    <a className='nav-link text-white' href='/hackathons'>Hackathons</a>
-                </li>
-                <li className='nav-item'>
-                    <a className='nav-link text-white' href='/scholarships'>Scholarships</a>
-                </li>
+                    </li>
+                    <li className='nav-item'>
+                        <a className='nav-link text-white' href='/hackathons'>Hackathons</a>
+                    </li>
+                    <li className='nav-item'>
+                        <a className='nav-link text-white' href='/scholarships'>Scholarships</a>
+                    </li>
+                    <li className='nav-item'>
+                        <button className="btn btn-light">Logout</button>
+                    </li>
+                </section>
+                }
+                { !loggedIn && 
+                    <li className='nav-item'>
+                        <button onClick={() => {nav('/login')}} className="btn btn-light">Login</button>
+                    </li>
+                }
             </ul>
         </div>        
       </nav>

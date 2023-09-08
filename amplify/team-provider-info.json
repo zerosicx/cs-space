@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-csspace-dev-230454-authRole",
+      "UnauthRoleArn": "arn:aws:iam::077080245453:role/amplify-csspace-dev-230454-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::077080245453:role/amplify-csspace-dev-230454-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-csspace-dev-230454-deployment",
+      "UnauthRoleName": "amplify-csspace-dev-230454-unauthRole",
+      "StackName": "amplify-csspace-dev-230454",
+      "StackId": "arn:aws:cloudformation:us-east-1:077080245453:stack/amplify-csspace-dev-230454/8dc4d940-4e37-11ee-a2b5-0e8e4ef13b0f",
+      "AmplifyAppId": "d3mfe7qinnz67m"
+    },
+    "categories": {
+      "auth": {
+        "csspace94ab5e34": {}
+      }
+    }
+  }
+}

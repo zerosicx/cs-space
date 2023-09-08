@@ -21,7 +21,11 @@ const JobCard = (props: Props) => {
             <h6>{company}</h6>
             {
               locations.map((loc: any, index: number) => {
-                return <span className="badge rounded-pill bg-secondary text-light" key={index}>{loc.name}</span>
+                if (index < 3){
+                  return <span className="badge rounded-pill bg-secondary text-light" key={index}>{loc.name}</span>
+                } else if (index === 3){
+                  return <span data-bs-toggle="tooltip" data-bs-placement="top" title="More locations"> +</span>
+                } else return null;
               })
             }
         </div>
