@@ -21,7 +21,7 @@ const Pagination: React.FC<PaginationProps> = ({ pageNumber, totalPages, setPage
 
   return (
     <nav aria-label="Page navigation">
-      <ul className="pagination justify-content-center">
+      <ul className="pagination justify-content-center my-4">
         <li className={`page-item ${pageNumber === 1 && 'disabled'}`}>
           <button className="page-link" onClick={handlePrevClick}>
             Previous

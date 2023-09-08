@@ -1,0 +1,7 @@
+:root {
+    --waikato-primary: #B3000C;
+}
+
+.waikato-nav{
+    background-color: var(--waikato-primary) !important;
+}
