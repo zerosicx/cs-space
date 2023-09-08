@@ -2,15 +2,21 @@ import React from 'react'
 import './NavBar.css';
 import waikatoLogo from '../utilties/University_of_Waikato_logo.png'
 import { useNavigate } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
 
 interface NavBarProps {
     loggedIn: boolean;
-    setLoggedIn: (loggedIn: boolean) => void;
 }
 
-const NavBar: React.FC<NavBarProps> = ({ loggedIn, setLoggedIn }) => {
+const NavBar: React.FC<NavBarProps> = ({ loggedIn  }) => {
 
     const nav = useNavigate();
+
+    const handleSignOut = () => {
+        Auth.signOut();
+        nav('/');
+    }
+
   return (
      <nav className="navbar navbar-expand-sm navbar-dark px-3 sticky-top waikato-nav">
         <a className="navbar-brand text-white" href="/">
@@ -39,7 +45,7 @@ const NavBar: React.FC<NavBarProps> = ({ loggedIn, setLoggedIn }) => {
                         <a className='nav-link text-white' href='/scholarships'>Scholarships</a>
                     </li>
                     <li className='nav-item'>
-                        <button className="btn btn-light">Logout</button>
+                        <button onClick={handleSignOut}className="btn btn-light">Logout</button>
                     </li>
                 </section>
                 }

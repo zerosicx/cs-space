@@ -1,8 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 
-type Props = {}
+interface ScholarshipsProps {
+  loggedIn: boolean
+}
 
-const Scholarships = (props: Props) => {
+const Scholarships: React.FC<ScholarshipsProps> = ({loggedIn}) => {
+
+  const nav = useNavigate();
+  
+  useEffect(() => {
+    if (!loggedIn){
+      nav('/login');
+    }
+  });
+    
   return (
     <div>Scholarships</div>
   )

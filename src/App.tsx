@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
@@ -8,20 +8,34 @@ import Hackathons from './pages/Hackathons';
 import Scholarships from './pages/Scholarships';
 import NavBar from './components/NavBar';
 import Login from './pages/Login';
+import { Auth } from 'aws-amplify';
 
 function App() {
   const [ loggedIn, setLoggedIn ] = useState<boolean>(false);
 
+  useEffect(() => {
+    const isAuthenticated = async () => {
+      try {
+        await Auth.currentAuthenticatedUser();
+        setLoggedIn(true);
+      } catch (error) {
+        setLoggedIn(false);
+      }
+    };
+
+    isAuthenticated();
+  })
+
   return (
    <BrowserRouter>
-   <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn}></NavBar>
+   <NavBar loggedIn={loggedIn}></NavBar>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/jobs" element={<Jobs />} />
-        <Route path="/hackathons" element={<Hackathons />} />
-        <Route path="/scholarships" element={<Scholarships />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/jobs" element={<Jobs loggedIn={loggedIn}/>} />
+        <Route path="/hackathons" element={<Hackathons loggedIn={loggedIn}/>} />
+        <Route path="/scholarships" element={<Scholarships loggedIn={loggedIn}/>} />
+        <Route path="/login" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
       </Routes>
     </BrowserRouter>
   );

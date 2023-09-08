@@ -3,33 +3,25 @@ import JobTable from '../components/JobTable';
 import Pagination from '../components/Pagination';
 import { nzJobsUrl } from '../utilties/config';
 import loadingImage from '../utilties/loading.gif';
-import { Auth } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
 
-type Props = {}
+interface JobsProps {
+  loggedIn: boolean
+}
 
-const Jobs = (props: Props) => {
+const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
 
   const [ pageNum, setPageNumber ] = useState<number>(1);
   const [ jobsData, setJobsData ] = useState<any[]>([]);
   const [ jobsLoaded, setJobsLoaded ] = useState<boolean>(false);
-  const [ authenticated, setAuthenticated ] = useState<boolean>(false);
   const nav = useNavigate();
 
   useEffect(() => {
-    async function checkAuthState() {
-      try {
-        await Auth.currentAuthenticatedUser();
-        // if user is logged in, show the page.
-        setAuthenticated(true);
-      } catch (error) {
-        console.log(error);
-        nav('/login');
-      }
+    if (!loggedIn){
+      nav('/login');
     }
-
-    checkAuthState();
-  });
+  })
+  
 
   useEffect(() => {
     // Define the base URL
@@ -57,7 +49,7 @@ const Jobs = (props: Props) => {
   return (
     <section className="container">
       {
-        authenticated &&
+        loggedIn &&
         <div className="">
         <article className="row py-5 bg-white">
           <h1 className="mt-4 pt-2 text-primary" >Job Listings</h1>
