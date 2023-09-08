@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './NavBar.css';
 import waikatoLogo from '../utilties/University_of_Waikato_logo.png'
 import { useNavigate } from 'react-router-dom';
-import { Auth } from 'aws-amplify';
+import { Auth, Hub } from 'aws-amplify';
 
 interface NavBarProps {
     loggedIn: boolean;
@@ -13,10 +13,29 @@ const NavBar: React.FC<NavBarProps> = ({ loggedIn, setLoggedIn  }) => {
 
     const nav = useNavigate();
 
+    const closeNavbar = () => {
+    const navbar = document.querySelector('.navbar-collapse');
+        if (navbar?.classList.contains('show')) {
+        navbar.classList.remove('show');
+        }
+    };
+
     const handleSignOut = () => {
         Auth.signOut();
         nav('/');
     }
+
+    Hub.listen('auth', (data) => {
+        if (data.payload.event === "signIn"){
+            setLoggedIn(true);
+            nav('/');
+            closeNavbar();
+        } else {
+            setLoggedIn(false);
+            closeNavbar();
+        }
+    })
+    
 
     useEffect(() => {
     const isAuthenticated = async () => {
