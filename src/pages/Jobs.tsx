@@ -16,11 +16,9 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
   const [ jobsLoaded, setJobsLoaded ] = useState<boolean>(false);
   const nav = useNavigate();
 
-  useEffect(() => {
-    if (!loggedIn){
-      nav('/login');
-    }
-  })
+  if (!loggedIn){
+    nav('/login');
+  }
   
 
   useEffect(() => {
