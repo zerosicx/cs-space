@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './NavBar.css';
 import waikatoLogo from '../utilties/University_of_Waikato_logo.png'
 import { useNavigate } from 'react-router-dom';
@@ -6,9 +6,10 @@ import { Auth } from 'aws-amplify';
 
 interface NavBarProps {
     loggedIn: boolean;
+    setLoggedIn: (loggedIn: boolean) => void;
 }
 
-const NavBar: React.FC<NavBarProps> = ({ loggedIn  }) => {
+const NavBar: React.FC<NavBarProps> = ({ loggedIn, setLoggedIn  }) => {
 
     const nav = useNavigate();
 
@@ -16,6 +17,23 @@ const NavBar: React.FC<NavBarProps> = ({ loggedIn  }) => {
         Auth.signOut();
         nav('/');
     }
+
+    useEffect(() => {
+    const isAuthenticated = async () => {
+      try {
+        const user = await Auth.currentAuthenticatedUser();
+        if (user){
+          setLoggedIn(true);
+        } else {
+          setLoggedIn(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    isAuthenticated();
+  })
 
   return (
      <nav className="navbar navbar-expand-sm navbar-dark px-3 sticky-top waikato-nav">

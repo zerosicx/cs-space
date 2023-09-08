@@ -16,10 +16,14 @@ function App() {
   useEffect(() => {
     const isAuthenticated = async () => {
       try {
-        await Auth.currentAuthenticatedUser();
-        setLoggedIn(true);
+        const user = await Auth.currentAuthenticatedUser();
+        if (user){
+          setLoggedIn(true);
+        } else {
+          setLoggedIn(false);
+        }
       } catch (error) {
-        setLoggedIn(false);
+        console.log(error);
       }
     };
 
@@ -28,7 +32,7 @@ function App() {
 
   return (
    <BrowserRouter>
-   <NavBar loggedIn={loggedIn}></NavBar>
+   <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn}></NavBar>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
 interface ScholarshipsProps {
@@ -9,11 +9,9 @@ const Scholarships: React.FC<ScholarshipsProps> = ({loggedIn}) => {
 
   const nav = useNavigate();
   
-  useEffect(() => {
-    if (!loggedIn){
-      nav('/login');
-    }
-  });
+  if (!loggedIn){
+    nav('/login');
+  }
     
   return (
     <div>Scholarships</div>
