@@ -6,12 +6,12 @@ type Props = {}
 
 const NavBar = (props: Props) => {
   return (
-     <nav className="navbar navbar-expand-sm navbar-light px-3 sticky-top waikato-nav">
+     <nav className="navbar navbar-expand-sm navbar-dark px-3 sticky-top waikato-nav">
         <a className="navbar-brand text-white" href="/">
             <img className="me-2" src={waikatoLogo} alt="" width="30" ></img>
             CS Space</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
+                <span className="navbar-toggler-icon color-white"></span>
         </button>
             <div className='collapse navbar-collapse' id='navbarNav'>
             <ul className='navbar-nav ms-auto'>
