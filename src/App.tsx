@@ -9,6 +9,7 @@ import Scholarships from './pages/Scholarships';
 import NavBar from './components/NavBar';
 import Login from './pages/Login';
 import { Auth } from 'aws-amplify';
+import JobDetails from './pages/JobDetails';
 
 function App() {
   const [ loggedIn, setLoggedIn ] = useState<boolean>(false);
@@ -40,6 +41,7 @@ function App() {
         <Route path="/hackathons" element={<Hackathons loggedIn={loggedIn}/>} />
         <Route path="/scholarships" element={<Scholarships loggedIn={loggedIn}/>} />
         <Route path="/login" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
+        <Route path="/jobs/:id" element={<JobDetails />}/>   
       </Routes>
     </BrowserRouter>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import JobTable from '../components/JobTable';
 import Pagination from '../components/Pagination';
-import { nzJobsUrl } from '../utilties/config';
+import { nzJobsUrl, APIKey } from '../utilties/config';
 import loadingImage from '../utilties/loading.gif';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,7 +28,7 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
     // Define the location parameter (you can customize this as needed)
 
     // Create the URL with the pageNumber parameter
-    const url = `${baseUrl}&page=${pageNum}`;
+    const url = `${baseUrl}&page=${pageNum}&api_key=${APIKey}`;
 
     // Make the fetch request
     fetch(url)
