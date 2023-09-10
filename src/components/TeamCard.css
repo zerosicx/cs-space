@@ -1,0 +1,19 @@
+.team-card__container {
+    justify-content: center;
+    align-items: center;
+}
+
+.team-card__card {
+    background-color: #f4f5f6;
+    border-radius: 8px;
+    margin: 10px auto;
+    overflow: hidden;
+}
+
+.team-card__card:hover {
+    
+}
+
+.info-grid {
+    display: flex;
+}
