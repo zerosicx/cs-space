@@ -53,7 +53,7 @@ const JobDetails = (props: Props) => {
   }, [id]); // Add id as a dependency to trigger the API call when it changes
 
   return (
-    <div className="container-fluid">
+    <div className="container">
         { jobDataLoaded &&
             <>
             <section className="row">
