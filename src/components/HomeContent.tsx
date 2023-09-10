@@ -14,6 +14,7 @@ const HomeContent = () => {
             </div>
             <div className='content2'>   
                 <div className='row'>
+                    {/*  TODO: Get data from the public API */}
                     <h3 className="mt-4 px-4">New Job Listings</h3>
                     <div className="listing-card__container col-md-12 col-lg-12 col-sm-12 px-4 my-2">
                         <div className="listing-card__card px-4 py-4">
@@ -37,6 +38,7 @@ const HomeContent = () => {
             </div>
             <div className='content3'>   
                 <div className='row'>
+                    {/* TODO: Get data from the database (Dynamo DB) */}
                     <h3 className="mt-4 px-4">Scholarships</h3>
                     <div className="listing-card__container col-md-12 col-lg-12 col-sm-12 px-4 my-2">
                         <div className="listing-card__card px-4 py-4">

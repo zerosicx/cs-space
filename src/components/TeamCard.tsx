@@ -3,6 +3,8 @@ import './TeamCard.css';
 import img_icon from '../images/img_placeholder.png';
 
 const TeamCard = () => {
+    // TODO: The information in this page can be turned into a database table and be fetched. Otherwise,
+    // it can be stored as a JSON under src/data to have less code. See: array map function
   return (
     <section className='section-white'>
         <div className='container'>

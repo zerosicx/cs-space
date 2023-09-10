@@ -2,6 +2,7 @@ import React from 'react'
 import './Content.css';
 
 const AboutContent = () => {
+  // Could use some bootstrap styling for a more consistent UI feel
   return (
     <div className="content-card px-4 py-3">
         <p>Campus Connect is dedicated to empowering students in optimising informative events and opportunities that are available to them.</p>
