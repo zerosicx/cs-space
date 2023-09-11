@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import JobTable from '../components/JobTable';
 import Pagination from '../components/Pagination';
-import { nzJobsUrl, APIKey } from '../utilties/config';
+import { nzJobsUrl } from '../utilties/config';
 import loadingImage from '../utilties/loading.gif';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,6 +15,9 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
   const [ jobsData, setJobsData ] = useState<any[]>([]);
   const [ jobsLoaded, setJobsLoaded ] = useState<boolean>(false);
   const nav = useNavigate();
+  const APIKey = process.env.REACT_APP_theMuseAPIKey;
+
+  console.log(APIKey);
 
   if (!loggedIn){
     nav('/login');
@@ -42,7 +45,7 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-    }, [pageNum]);
+    }, [pageNum, APIKey]);
 
   return (
     <section className="container">
