@@ -2,16 +2,24 @@ import { Auth } from 'aws-amplify';
 import React, { useEffect, useState } from 'react'
 import { redirect, useSearchParams } from 'react-router-dom';
 import { jobDetailBaseUrl, APIKey } from '../utilties/config';
+import { useNavigate } from 'react-router-dom';
 
-type Props = {}
+interface JobsProps {
+  loggedIn: boolean
+}
 
-const JobDetails = (props: Props) => {
+const JobDetails: React.FC<JobsProps> = ({loggedIn}) => {
 
     // Check if the user is authenticated. If not, redirect to login page.
     const [searchParams, setSearchParams] = useSearchParams();
     const id = searchParams.get("id");
     const [ jobData, setJobData ] = useState<any>(null);
     const [ jobDataLoaded, setJobDataLoaded ] = useState<boolean>(false);
+    const nav = useNavigate();
+
+    if (!loggedIn){
+      nav('/login');
+    }
 
     console.log(`Searching for ${id}`);
 

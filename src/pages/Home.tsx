@@ -7,7 +7,7 @@ const Home = (props: Props) => {
   return (
     <div className='container'>
         <h1 className="mt-4 px-3">Welcome to CS Space!</h1>
-        <HomeContent></HomeContent>     
+        <HomeContent loggedIn={false}></HomeContent>     
     </div>
   )
 }

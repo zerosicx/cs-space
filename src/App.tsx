@@ -41,7 +41,7 @@ function App() {
         <Route path="/hackathons" element={<Hackathons loggedIn={loggedIn}/>} />
         <Route path="/scholarships" element={<Scholarships loggedIn={loggedIn}/>} />
         <Route path="/login" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
-        <Route path="/jobs/:id" element={<JobDetails />}/>   
+        <Route path="/jobs/:id" element={<JobDetails loggedIn={false} />}/>   
       </Routes>
     </BrowserRouter>
   );
