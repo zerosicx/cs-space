@@ -12,9 +12,6 @@ const JobDetails = (props: Props) => {
     const id = searchParams.get("id");
     const [ jobData, setJobData ] = useState<any>(null);
     const [ jobDataLoaded, setJobDataLoaded ] = useState<boolean>(false);
-    const APIKey = process.env.REACT_APP_theMuseAPIKey;
-
-    console.log(`Searching for ${id}`);
 
     useEffect(() => {
     const isAuthenticated = async () => {
@@ -34,8 +31,10 @@ const JobDetails = (props: Props) => {
   useEffect(() => {
     // Move the API call inside this useEffect
     const getJobDetailsData = () => {
+      const APIKey = process.env.REACT_APP_theMuseAPIKey;
+      console.log(`Searching for ${id}`);
       const baseUrl = jobDetailBaseUrl;
-      const url = `${baseUrl}/${id}?api_key=${APIKey}`;
+      const url = APIKey ? `${baseUrl}/${id}?api_key=${APIKey}` : `${baseUrl}/${id}`;
 
       fetch(url)
         .then((response) => response.json())
@@ -51,7 +50,7 @@ const JobDetails = (props: Props) => {
     };
 
     getJobDetailsData(); // Call the API when the component mounts
-  }, [id, APIKey]); // Add id as a dependency to trigger the API call when it changes
+  }, [id]); // Add id as a dependency to trigger the API call when it changes
 
   return (
     <div className="container">

@@ -15,9 +15,6 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
   const [ jobsData, setJobsData ] = useState<any[]>([]);
   const [ jobsLoaded, setJobsLoaded ] = useState<boolean>(false);
   const nav = useNavigate();
-  const APIKey = process.env.REACT_APP_theMuseAPIKey;
-
-  console.log(APIKey);
 
   if (!loggedIn){
     nav('/login');
@@ -29,9 +26,9 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
     const baseUrl = nzJobsUrl;
 
     // Define the location parameter (you can customize this as needed)
-
+    const APIKey = process.env.REACT_APP_theMuseAPIKey;
     // Create the URL with the pageNumber parameter
-    const url = `${baseUrl}&page=${pageNum}&api_key=${APIKey}`;
+    const url = APIKey ? `${baseUrl}&page=${pageNum}&api_key=${APIKey}` : `${baseUrl}&page=${pageNum}`;
 
     // Make the fetch request
     fetch(url)
@@ -45,7 +42,7 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-    }, [pageNum, APIKey]);
+    }, [pageNum]);
 
   return (
     <section className="container">
