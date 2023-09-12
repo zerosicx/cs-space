@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Content.css';
 import JobTable from '../components/JobTable';
-import { nzJobsUrl, APIKey } from '../utilties/config';
+import { nzJobsUrl } from '../utilties/config';
 import { useNavigate } from 'react-router-dom';
 
 interface JobsProps {
@@ -17,6 +17,7 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
     useEffect(() => {
         // Define the base URL
         const baseUrl = nzJobsUrl;
+        const APIKey = process.env.REACT_APP_theMuseAPIKey;
 
         // Define the location parameter (you can customize this as needed)
 

@@ -14,10 +14,9 @@ const JobDetails: React.FC<JobsProps> = ({loggedIn}) => {
     const id = searchParams.get("id");
     const [ jobData, setJobData ] = useState<any>(null);
     const [ jobDataLoaded, setJobDataLoaded ] = useState<boolean>(false);
-    const nav = useNavigate();
 
     if (!loggedIn){
-      nav('/login');
+      redirect('/login');
     }
 
     console.log(`Searching for ${id}`);
