@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './Content.css';
 import JobTable from '../components/JobTable';
 import { nzJobsUrl } from '../utilties/config';
-import { useNavigate } from 'react-router-dom';
 
 interface JobsProps {
     loggedIn: boolean
@@ -46,7 +45,7 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
         .catch((error) => {
             console.error('Error fetching data:', error);
         });
-        }, [pageNum]);
+    }, [pageNum]);
 
     return (
         <div className='grid-container px-2 py-2'>
