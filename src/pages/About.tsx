@@ -1,16 +1,19 @@
 import React from 'react'
 import AboutContent from '../components/AboutContent'
-import TeamCard from '../components/TeamCard'
+import TeamTable from '../components/TeamTable'
+import teamInfo from '../data/teamInfo.json'
 
 type Props = {}
 
 const About = (props: Props) => {
   return (
     <div className='container'>
-      <h1 className="mt-4 text-center" >About Us</h1> 
+      <h1 className="mt-4 text-center py-2" >About Us</h1> 
       <AboutContent></AboutContent>
-      <h1 className="mt-4 text-center">Our Team</h1>
-      <TeamCard></TeamCard>
+      <div className='container'>
+        <h1 className="mt-4 text-center">Our Team</h1>
+        <TeamTable data={teamInfo.team_info}></TeamTable>
+      </div>
     </div>
   )
 }

@@ -1,0 +1,26 @@
+{
+    "team_info": [{
+        "name": "Hannah Carino",
+        "title": "Software Engineering Student",
+        "linkedin": "https://www.linkedin.com/in/hc243/",
+        "img_link": "hc_icon.png"
+    }, 
+    {
+        "name": "Bernard Sullivan",
+        "title": "Cyber Security Administrator",
+        "linkedin": "https://www.linkedin.com/in/bernard-sullivan/",
+        "img_link": "bs_icon.png"
+    },
+    {
+        "name": "Jascha Penaredondo",
+        "title": "Software Engineering Student",
+        "linkedin": "https://www.linkedin.com/in/jascha-penaredondo/",
+        "img_link": "jp_icon.png"
+    },
+    {
+        "name": "Anita Glucina-Young",
+        "title": "Cyber Security Student",
+        "linkedin": "https://www.linkedin.com/in/anitagy/",
+        "img_link": "agy_icon.png"
+    }]
+}
