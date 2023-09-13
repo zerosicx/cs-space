@@ -3,15 +3,23 @@ import React, { useEffect, useState } from 'react'
 import { redirect, useSearchParams } from 'react-router-dom';
 import { jobDetailBaseUrl } from '../utilties/config';
 
-type Props = {}
+interface JobsProps {
+  loggedIn: boolean
+}
 
-const JobDetails = (props: Props) => {
+const JobDetails: React.FC<JobsProps> = ({loggedIn}) => {
 
     // Check if the user is authenticated. If not, redirect to login page.
     const [searchParams, setSearchParams] = useSearchParams();
     const id = searchParams.get("id");
     const [ jobData, setJobData ] = useState<any>(null);
     const [ jobDataLoaded, setJobDataLoaded ] = useState<boolean>(false);
+
+    if (!loggedIn){
+      redirect('/login');
+    }
+
+    console.log(`Searching for ${id}`);
 
     useEffect(() => {
     const isAuthenticated = async () => {
