@@ -12,6 +12,7 @@ const JobTable = (props: Props) => {
             {data.map((job: any, index: number) => (
                 <JobCard name={job.name} id={job.id} locations={job.locations} company={job.company.name} key={index}></JobCard>
             ))}
+            
         </div>
             
             

@@ -1,8 +1,7 @@
 import { Auth } from 'aws-amplify';
 import React, { useEffect, useState } from 'react'
 import { redirect, useSearchParams } from 'react-router-dom';
-import { jobDetailBaseUrl, APIKey } from '../utilties/config';
-import { useNavigate } from 'react-router-dom';
+import { jobDetailBaseUrl } from '../utilties/config';
 
 interface JobsProps {
   loggedIn: boolean
@@ -15,10 +14,9 @@ const JobDetails: React.FC<JobsProps> = ({loggedIn}) => {
     const id = searchParams.get("id");
     const [ jobData, setJobData ] = useState<any>(null);
     const [ jobDataLoaded, setJobDataLoaded ] = useState<boolean>(false);
-    const nav = useNavigate();
 
     if (!loggedIn){
-      nav('/login');
+      redirect('/login');
     }
 
     console.log(`Searching for ${id}`);
@@ -41,8 +39,10 @@ const JobDetails: React.FC<JobsProps> = ({loggedIn}) => {
   useEffect(() => {
     // Move the API call inside this useEffect
     const getJobDetailsData = () => {
+      const APIKey = process.env.REACT_APP_theMuseAPIKey;
+      console.log(`Searching for ${id}`);
       const baseUrl = jobDetailBaseUrl;
-      const url = `${baseUrl}/${id}?api_key=${APIKey}`;
+      const url = APIKey ? `${baseUrl}/${id}?api_key=${APIKey}` : `${baseUrl}/${id}`;
 
       fetch(url)
         .then((response) => response.json())
@@ -61,7 +61,7 @@ const JobDetails: React.FC<JobsProps> = ({loggedIn}) => {
   }, [id]); // Add id as a dependency to trigger the API call when it changes
 
   return (
-    <div className="container-fluid">
+    <div className="container">
         { jobDataLoaded &&
             <>
             <section className="row">

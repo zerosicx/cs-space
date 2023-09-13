@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import JobTable from '../components/JobTable';
 import Pagination from '../components/Pagination';
-import { nzJobsUrl, APIKey } from '../utilties/config';
+import { nzJobsUrl } from '../utilties/config';
 import loadingImage from '../utilties/loading.gif';
 import { useNavigate } from 'react-router-dom';
 
@@ -26,9 +26,9 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
     const baseUrl = nzJobsUrl;
 
     // Define the location parameter (you can customize this as needed)
-
+    const APIKey = process.env.REACT_APP_theMuseAPIKey;
     // Create the URL with the pageNumber parameter
-    const url = `${baseUrl}&page=${pageNum}&api_key=${APIKey}`;
+    const url = APIKey ? `${baseUrl}&page=${pageNum}&api_key=${APIKey}` : `${baseUrl}&page=${pageNum}`;
 
     // Make the fetch request
     fetch(url)

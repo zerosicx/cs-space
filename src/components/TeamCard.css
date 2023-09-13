@@ -11,9 +11,39 @@
 }
 
 .team-card__card:hover {
-    
+    background-color: #B3000C;
+    color: #f4f5f6;
 }
 
 .info-grid {
-    display: flex;
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
+.team-info {
+    min-width: 50%;
+    margin-top: 20px;
+}
+
+.team-img {
+    background-color: #f4f5f6;
+    border: 3px solid #f4f5f6;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+}
+
+.team-icon a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 1px 5px 5px 8px;
+    width: 30px;
+    height: 30px;
+    background-color: #f4f4f4;
+    border-radius: 50%;
+    color: #f4f5f6;
+}
+
+.team-icon a.linkedin {
+    background-color: #0077B5;
 }
