@@ -1,0 +1,55 @@
+{
+  "auth": {
+    "csspace94ab5e34": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "csSpaceAssumeRoleForSecrets": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_csSpaceAssumeRoleForSecrets_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "csSpaceAssumeRoleForSecrets"
+        }
+      ]
+    },
+    "AMPLIFY_function_csSpaceAssumeRoleForSecrets_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "csSpaceAssumeRoleForSecrets"
+        }
+      ]
+    }
+  }
+}

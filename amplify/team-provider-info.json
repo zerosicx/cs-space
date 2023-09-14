@@ -10,23 +10,16 @@
       "StackName": "amplify-csspace-main-00757",
       "StackId": "arn:aws:cloudformation:us-east-1:077080245453:stack/amplify-csspace-main-00757/434c47c0-5037-11ee-b874-1269f7b97d97",
       "AmplifyAppId": "d2h0rztbstrxz2"
-    }
-  },
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-csspace-dev-230454-authRole",
-      "UnauthRoleArn": "arn:aws:iam::077080245453:role/amplify-csspace-dev-230454-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::077080245453:role/amplify-csspace-dev-230454-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-csspace-dev-230454-deployment",
-      "UnauthRoleName": "amplify-csspace-dev-230454-unauthRole",
-      "StackName": "amplify-csspace-dev-230454",
-      "StackId": "arn:aws:cloudformation:us-east-1:077080245453:stack/amplify-csspace-dev-230454/8dc4d940-4e37-11ee-a2b5-0e8e4ef13b0f",
-      "AmplifyAppId": "d3mfe7qinnz67m"
     },
     "categories": {
       "auth": {
         "csspace94ab5e34": {}
+      },
+      "function": {
+        "csSpaceAssumeRoleForSecrets": {
+          "deploymentBucketName": "amplify-csspace-main-00757-deployment",
+          "s3Key": "amplify-builds/csSpaceAssumeRoleForSecrets-624b77797a2b4d626448-build.zip"
+        }
       }
     }
   }
