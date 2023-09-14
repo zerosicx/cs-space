@@ -21,7 +21,7 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
         // Define the location parameter (you can customize this as needed)
 
         // Create the URL with the pageNumber parameter
-        const url = `${baseUrl}&page=${pageNum}&api_key=${APIKey}`;
+        const url = APIKey ? `${baseUrl}&page=${pageNum}&api_key=${APIKey}` : `${baseUrl}&page=${pageNum}` ;
 
         // Make the fetch request
         fetch(url)
