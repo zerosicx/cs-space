@@ -5,7 +5,7 @@ type Props = {
     data: any
 }
 
-const JobTable = (props: Props) => {
+const ScholTable = (props: Props) => {
     const { data } = props;
     return (
         <div className="row">
@@ -19,4 +19,4 @@ const JobTable = (props: Props) => {
     )
 }
 
-export default JobTable;
+export default ScholTable;
