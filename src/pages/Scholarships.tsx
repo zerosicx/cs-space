@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { csSpaceBackendApiUrl } from '../utilties/config';
 import loadingImage from '../utilties/loading.gif';
-import JobTable from '../components/JobTable';
 import ScholTable from '../components/ScholTable';
 
 

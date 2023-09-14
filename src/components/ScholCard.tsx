@@ -9,7 +9,7 @@ type Props = {
     description: String
 }
 
-const JobCard = (props: Props) => {
+const ScholCard = (props: Props) => {
   const { title, id, supervisors, description} = props;
 //   const nav = useNavigate();
 
@@ -39,4 +39,4 @@ const JobCard = (props: Props) => {
   )
 }
 
-export default JobCard
+export default ScholCard;
