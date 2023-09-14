@@ -1,6 +1,5 @@
 import React from 'react'
 import './JobCard.css';
-import { useNavigate } from 'react-router-dom';
 import './ScholCard.css';
 
 type Props = {

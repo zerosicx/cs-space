@@ -22,21 +22,25 @@ const JobCard = (props: Props) => {
   };
 
   return (
-    <div className="job-card__container col-md-6 col-lg-6 col-sm-12 my-2">
-        <div className="bg-light job-card__card px-4 py-4" onClick={onJobCardClick}>
-            <h5 className="text-primary">{name}</h5>    
-            <p>{id}</p>
-            <h6>{company}</h6>
-            {
-              locations.map((loc: any, index: number) => {
-                if (index < 3){
-                  return <span className="badge rounded-pill bg-secondary text-light" key={index}>{loc.name}</span>
-                } else if (index === 3){
-                  return <span data-bs-toggle="tooltip" data-bs-placement="top" title="More locations" key={index}> +</span>
-                } else return null;
-              })
-            }
-        </div>     
+    <div className="job-card__container col-sm-6 my-2">
+            <div className="card job-card__card" onClick={onJobCardClick}>
+              <div className="card-body">
+                <h5 className="card-title">{name}</h5>
+                <h6 className="card-subtitle mb-2 text-muted">{company}</h6>
+                <p className="card-text">
+                  {
+                    locations.map((loc: any, index: number) => {
+                      if (index < 3){
+                        return <span className="badge rounded-pill bg-secondary text-light" key={index}>{loc.name}</span>
+                      } else if (index === 3){
+                        return <span data-bs-toggle="tooltip" data-bs-placement="top" title="More locations" key={index}> +</span>
+                      } else return null;
+                    })
+                  }
+                </p>
+                <a href={`/jobs/job?id=${id}`} className="card-link" onClick={onJobCardClick}>Read more</a>
+              </div>
+          </div>
     </div>
   )
 }

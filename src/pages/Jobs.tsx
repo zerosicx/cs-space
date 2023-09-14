@@ -77,7 +77,7 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
       {
         loggedIn &&
         <div className="">
-        <article className="row py-5 bg-white">
+        <article className="row py-3 bg-white">
           <h1 className="mt-4 pt-2 text-primary" >Job Listings</h1>
           <p> <em> This page contains a listing of all entry level websites compiled by The Muse. <br/></em> See more at <a className="text-info" href="https://www.themuse.com/developers/api/v2"><em>The Muse Developer's API</em></a></p>
         </article>
@@ -85,7 +85,7 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
         { jobsLoaded &&
         <section>
           <article className="">
-            <JobTable data={jobsData}></JobTable>
+            <JobTable data={jobsData} showJobFilter={true}></JobTable>
           </article>
 
           <article>

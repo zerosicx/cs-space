@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './Content.css';
 import JobTable from '../components/JobTable';
 import { nzJobsUrl } from '../utilties/config';
-import { useNavigate } from 'react-router-dom';
 
 interface JobsProps {
     loggedIn: boolean
@@ -10,7 +9,7 @@ interface JobsProps {
 
 const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
 
-    const [ pageNum, setPageNumber ] = useState<number>(1);
+    const [ pageNum ] = useState<number>(1);
     const [ jobsData, setJobsData ] = useState<any[]>([]);
     const [ jobsLoaded, setJobsLoaded ] = useState<boolean>(false);
 
@@ -68,7 +67,7 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
                             { jobsLoaded &&
                             <section>
                             <article className="">
-                                <JobTable data={jobsData.slice(0,6)}></JobTable>
+                                <JobTable data={jobsData.slice(0,6)} showJobFilter={false}></JobTable>
                             </article>
                             </section>
                             }

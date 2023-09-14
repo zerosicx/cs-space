@@ -10,7 +10,7 @@ interface JobsProps {
 const JobDetails: React.FC<JobsProps> = ({loggedIn}) => {
 
     // Check if the user is authenticated. If not, redirect to login page.
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const id = searchParams.get("id");
     const [ jobData, setJobData ] = useState<any>(null);
     const [ jobDataLoaded, setJobDataLoaded ] = useState<boolean>(false);
@@ -65,14 +65,13 @@ const JobDetails: React.FC<JobsProps> = ({loggedIn}) => {
         { jobDataLoaded &&
             <>
             <section className="row">
-                <article className="col col-md-8  col-sm-12 description bg-white my-1">
-                    <h1 className="mt-4 mb-3 text-primary">{jobData.name}</h1>
-                    <h3> {jobData.company.name} </h3>
-                    <div dangerouslySetInnerHTML={{ __html: jobData.contents }} />
-                </article>
-                <article className="col col-md-4 my-5 metadata">
-                    <div className="my-3 mx-3 h-auto bg-light p-5 rounded shadow">
-                        <h3>Meta Data</h3>
+                <article className="col col-sm-12 description bg-white my-1">
+                   <div className="container-fluid card my-4 h-auto bg-light p-5">
+                    <div className="">
+                      <h1 className="display-4 mt-4 mb-3 text-primary">{jobData.name}</h1>
+                    </div>
+                        <h3>Details</h3>
+                        <h4 className="text-danger py-2"> {jobData.company.name} </h4>
                         <p><b>Date:</b> {jobData.publication_date}</p>
 
                         {
@@ -87,6 +86,8 @@ const JobDetails: React.FC<JobsProps> = ({loggedIn}) => {
                         }
                         </p>
                     </div>
+                    <h1 className="text-primary" >Description</h1>
+                    <div dangerouslySetInnerHTML={{ __html: jobData.contents }} />
                 </article>
             </section>
             </>
