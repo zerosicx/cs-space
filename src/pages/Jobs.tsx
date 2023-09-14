@@ -9,10 +9,21 @@ interface JobsProps {
   loggedIn: boolean
 }
 
+interface JobAttributes {
+  id: number,
+  name: string,
+  description: string,
+  date: string,
+  categories: any[],
+  level: string,
+  company: string,
+  locations: any[]
+}
+
 const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
 
   const [ pageNum, setPageNumber ] = useState<number>(1);
-  const [ jobsData, setJobsData ] = useState<any[]>([]);
+  const [ jobsData, setJobsData ] = useState<JobAttributes[]>([]);
   const [ jobsLoaded, setJobsLoaded ] = useState<boolean>(false);
   const nav = useNavigate();
 
@@ -35,7 +46,24 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
       .then((response) => response.json())
       .then((data) => {
         // Assuming the data returned is an array of jobs
-        const results = data.results;
+        const results: JobAttributes[] = [];
+        
+        data.results.map((job: any) => {
+          const jobItem: JobAttributes = {
+            id: job.id,
+            name: job.name,
+            description: job.content,
+            date: job.publication_date,
+            categories: job.categories,
+            level: job.levels[0].name,
+            company: job.company ? job.company : null,
+            locations: job.locations
+          };
+
+          results.push(jobItem);
+          return null;
+        })
+
         setJobsData(results);
         setJobsLoaded(true);
       })
@@ -49,7 +77,7 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
       {
         loggedIn &&
         <div className="">
-        <article className="row py-5 bg-white">
+        <article className="row py-3 bg-white">
           <h1 className="mt-4 pt-2 text-primary" >Job Listings</h1>
           <p> <em> This page contains a listing of all entry level websites compiled by The Muse. <br/></em> See more at <a className="text-info" href="https://www.themuse.com/developers/api/v2"><em>The Muse Developer's API</em></a></p>
         </article>
@@ -57,7 +85,7 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
         { jobsLoaded &&
         <section>
           <article className="">
-            <JobTable data={jobsData}></JobTable>
+            <JobTable data={jobsData} showJobFilter={true}></JobTable>
           </article>
 
           <article>

@@ -2,7 +2,7 @@ import React from 'react'
 import ScholCard from './ScholCard';
 
 type Props = {
-    data: any
+    data: any[]
 }
 
 const ScholTable = (props: Props) => {
@@ -10,7 +10,7 @@ const ScholTable = (props: Props) => {
     return (
         <div className="row">
             {data.map((schol: any, index: number) => (
-                <ScholCard title={schol.Title} id={schol.ScholarshipID} supervisors={schol["Supervisor/s"]} description={schol.Description} key={index}></ScholCard>
+                <ScholCard title={schol['Title']} supervisors={schol['Supervisor/s'].split(',')} description={schol['Description']} key={index}></ScholCard>
             ))}
             
         </div>

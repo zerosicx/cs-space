@@ -12,7 +12,7 @@ interface ScholarshipsProps {
 const Scholarships: React.FC<ScholarshipsProps> = ({loggedIn}) => {
 
   const [ scholData, setScholData ] = useState<any[]>([]);
-  const [ jobsLoaded, setJobsLoaded ] = useState<boolean>(false);
+  const [ scholDataLoaded, setScholDataLoaded ] = useState<boolean>(false);
   const nav = useNavigate();
 
   if (!loggedIn){
@@ -30,13 +30,14 @@ const Scholarships: React.FC<ScholarshipsProps> = ({loggedIn}) => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        const results = data.items;
+        const results = data.Items;
         setScholData(results);
+        setScholDataLoaded(true);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-    } );
+    }, [] );
     
   return (
     <section className="container">
@@ -48,7 +49,7 @@ const Scholarships: React.FC<ScholarshipsProps> = ({loggedIn}) => {
           <p>This page contains data collected by the team regarding scholarships relevant to the Computer Science/Engineering department at the University of Waikato.</p>
         </article>
 
-        { jobsLoaded &&
+        { scholDataLoaded &&
         <section>
           <article className="">
             <ScholTable data={scholData}></ScholTable>
@@ -57,7 +58,7 @@ const Scholarships: React.FC<ScholarshipsProps> = ({loggedIn}) => {
         </section>
         }
 
-        { !jobsLoaded &&
+        { !scholDataLoaded &&
         <div className="d-flex align-items-center">
           <img className="mx-auto" src={loadingImage} alt="loading gif"></img>
         </div>
