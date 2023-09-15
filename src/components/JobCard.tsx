@@ -9,8 +9,6 @@ type Props = {
     company: String
 }
 
-
-
 const JobCard = (props: Props) => {
   const { name, id, locations, company} = props;
   const nav = useNavigate();

@@ -1,32 +1,39 @@
 import React from 'react'
 import './JobCard.css';
 import './ScholCard.css';
+import { useNavigate } from 'react-router-dom';
 
-type Props = {
+type ScholCardProps = {
     title: String,
-    id?: number,
     supervisors: any[],
-    description: String
+    description: String,
+    id: number
 }
 
-const ScholCard = (props: Props) => {
-  const { title, id, supervisors, description} = props;
+const ScholCard: React.FC<ScholCardProps>= ({title, supervisors, description, id}) => {
+  const nav = useNavigate();
+
+  // When the divider is clicked, redirect the user to the job details page.
+  const onScholCardClick = () => {
+    console.log(`Job with ID ${id} clicked`);
+    nav(`/scholarships/scholarship?id=${id}`);
+  };
 
   return (
-    <div className="job-card__container col-md-6 col-lg-6 col-sm-12 my-2">
-        <div className="bg-light job-card__card px-4 py-4">
-            <h5 className="text-primary">{title}</h5>    
-            <p>{id}</p>
-            <p className="line-clamp-text">{description}</p>
-            {
-              supervisors.map((loc: any, index: number) => {
-                if (index < 3){
-                  return <span className="badge rounded-pill bg-secondary text-light" key={index}>{loc.name}</span>
-                } else if (index === 3){
-                  return <span data-bs-toggle="tooltip" data-bs-placement="top" title="More locations" key={index}> +</span>
-                } else return null;
-              })
-            }
+    <div className="job-card__container col-sm-6 my-2" onClick={onScholCardClick}>
+        <div className="card job-card__card">
+          <div className="card-body">
+            <div className="card-text">
+              <h5 className="text-primary">{title}</h5>    
+                {
+                  supervisors.map((schol: any, index: number) => {
+                    return <span className="badge rounded-pill bg-secondary text-light" key={index}>{schol}</span>
+                  })
+                }
+                <hr></hr>
+             <p className="line-clamp-text">{description}</p>
+            </div>
+          </div>
         </div>     
     </div>
   )

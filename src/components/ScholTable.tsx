@@ -10,9 +10,8 @@ const ScholTable = (props: Props) => {
     return (
         <div className="row">
             {data.map((schol: any, index: number) => (
-                <ScholCard title={schol['Title']} supervisors={schol['Supervisor/s'].split(',')} description={schol['Description']} key={index}></ScholCard>
+                <ScholCard title={schol['Title']} supervisors={schol['Supervisor/s'].split(',')} description={schol['Description']} id={schol["ScholarshipID"]} key={index}></ScholCard>
             ))}
-            
         </div>
             
             

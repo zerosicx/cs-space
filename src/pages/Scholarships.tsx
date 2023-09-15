@@ -59,9 +59,7 @@ const Scholarships: React.FC<ScholarshipsProps> = ({loggedIn}) => {
         }
 
         { !scholDataLoaded &&
-        <div className="d-flex align-items-center">
-          <img className="mx-auto" src={loadingImage} alt="loading gif"></img>
-        </div>
+          <img className="mx-auto w-100" src={loadingImage} alt="loading gif"></img>
         }
       </div> 
       }
