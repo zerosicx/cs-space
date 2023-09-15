@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Content.css';
 import JobTable from '../components/JobTable';
 import { nzJobsUrl } from '../utilties/config';
+import { getSecretAPIKey } from '../utilties/getSecret';
 
 interface JobsProps {
     loggedIn: boolean
@@ -13,12 +14,10 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
     const [ jobsData, setJobsData ] = useState<any[]>([]);
     const [ jobsLoaded, setJobsLoaded ] = useState<boolean>(false);
 
-    useEffect(() => {
+    const getJobsData = async () => {
         // Define the base URL
         const baseUrl = nzJobsUrl;
-        const APIKey = process.env.REACT_APP_theMuseAPIKey;
-
-        // Define the location parameter (you can customize this as needed)
+        const APIKey =  await getSecretAPIKey();
 
         // Create the URL with the pageNumber parameter
         const url = APIKey ? `${baseUrl}&page=${pageNum}&api_key=${APIKey}` : `${baseUrl}&page=${pageNum}` ;
@@ -29,23 +28,17 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
         .then((data) => {
             // Assuming the data returned is an array of jobs
             const results = data.results;
-            console.log(results[0].publication_date);
-
-            
-            // Go through publication dates then sort
-            for(var i=0; i<results.length; i++) {
-                results[i].publication_date = new Date(Date.parse(results[i].publication_date));
-            }
-            results.sort((date1: { publication_date: number; }, date2: { publication_date: number; }) => date2.publication_date - date1.publication_date);
-            console.log(results);
-
             setJobsData(results);
             setJobsLoaded(true);
         })
         .catch((error) => {
             console.error('Error fetching data:', error);
         });
-    }, [pageNum]);
+    }
+
+    useEffect(() => {
+        getJobsData();
+    }, []);
 
     return (
         <div className='grid-container px-2 py-2'>

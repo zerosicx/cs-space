@@ -6,13 +6,28 @@ import {
   SecretsManagerClient,
   GetSecretValueCommand,
 } from "@aws-sdk/client-secrets-manager";
+import { getCredentialsUrl } from "./config";
 
 export const getSecretAPIKey = async () => {
     const secret_name = "csspace/theMuseAPIKey";
+    const credentials = await getCredentials()
+        .then((result) => {
+            return result;
+        })
+        .catch((error) => {
+            // Handle errors here
+            console.error("API Error:", error);
+        });
+
 
 
     const client = new SecretsManagerClient({
-        region: "us-east-1"
+        region: "us-east-1",
+        credentials: {
+            accessKeyId: credentials.AccessKeyId,
+            secretAccessKey: credentials.SecretAccessKey,
+            sessionToken: credentials.SessionToken
+        }
     })
     
     let response;
@@ -23,14 +38,25 @@ export const getSecretAPIKey = async () => {
         SecretId: secret_name,
         VersionStage: "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified
         })
-    );
+        );
     } catch (error) {
-    // For a list of exceptions thrown, see
-    // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
-    throw error;
+        // For a list of exceptions thrown, see
+        // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+        throw error;
     }
 
-    const secret = response.SecretString;
-    console.log(response.SecretString);
-    return secret;
+    const secret = JSON.stringify(response.SecretString);
+    const value = JSON.parse(secret);
+    return value.theMuseAPIKey;
+}
+
+async function getCredentials() {
+
+    const credentials = await fetch(getCredentialsUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        return data;
+    })
+
+    return credentials;
 }
