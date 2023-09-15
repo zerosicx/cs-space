@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import './Content.css';
 import JobTable from '../components/JobTable';
-import { nzJobsUrl } from '../utilties/config';
+import { csSpaceBackendApiUrl, nzJobsUrl } from '../utilties/config';
 import { getSecretAPIKey } from '../utilties/getSecret';
+import loadingImage from '../utilties/loading.gif';
+import ScholTable from './ScholTable';
 
 interface JobsProps {
     loggedIn: boolean
@@ -13,11 +15,16 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
     const [ pageNum ] = useState<number>(1);
     const [ jobsData, setJobsData ] = useState<any[]>([]);
     const [ jobsLoaded, setJobsLoaded ] = useState<boolean>(false);
+    const [ scholData, setScholData ] = useState<any[]>([]);
+    const [ scholDataLoaded, setScholDataLoaded ] = useState<boolean>(false);
 
     const getJobsData = async () => {
         // Define the base URL
         const baseUrl = nzJobsUrl;
-        const APIKey =  await getSecretAPIKey();
+        let APIKey = null;
+        if (loggedIn){
+            APIKey =  await getSecretAPIKey();
+        }
 
         // Create the URL with the pageNumber parameter
         const url = APIKey ? `${baseUrl}&page=${pageNum}&api_key=${APIKey}` : `${baseUrl}&page=${pageNum}` ;
@@ -36,8 +43,29 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
         });
     }
 
+    const getScholarshipsData = async () => {
+        // Define the base URL
+        const baseUrl = csSpaceBackendApiUrl;
+
+        // Create the URL with the pageNumber parameter
+        const url = `${baseUrl}/scholarships`;
+        // Make the fetch request
+        fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+            const results = data.Items;
+            setScholData(results);
+            setScholDataLoaded(true);
+        })
+        .catch((error) => {
+            console.error('Error fetching data:', error);
+        });
+    }
+
+
     useEffect(() => {
         getJobsData();
+        getScholarshipsData();
     }, []);
 
     return (
@@ -50,7 +78,7 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
                     </a>        
                 </div>
             </div>
-            <div className='content2'>   
+            <div className='content2 col'>   
                 <div className='row'>
                     {/*  TODO: Get data from the public API */}
                     <h3 className="mt-4 px-4">New Job Listings</h3>
@@ -58,11 +86,12 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
                     {
                         <div className="">
                             { jobsLoaded &&
-                            <section>
                             <article className="">
-                                <JobTable data={jobsData.slice(0,6)} showJobFilter={false}></JobTable>
+                                <JobTable data={jobsData.slice(0,3)} showJobFilter={false}></JobTable>
                             </article>
-                            </section>
+                            }
+                            { !jobsLoaded &&
+                                    <img className="w-100" src={loadingImage} alt="loading gif"></img>
                             }
                         </div> 
                     }
@@ -74,18 +103,14 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
                     {/* TODO: Get data from the database (Dynamo DB) */}
                     <h3 className="mt-4 px-4">Scholarships</h3>
                     <div className="listing-card__container col-md-12 col-lg-12 col-sm-12 px-4 my-2">
-                        <div className="listing-card__card px-4 py-4">
-                            <h4>Scholarship One</h4>    
-                            <p>Description</p>
-                        </div>
-                        <div className="listing-card__card px-4 py-4">
-                            <h4>Scholarship Two</h4>    
-                            <p>Description</p>
-                        </div>
-                        <div className="listing-card__card px-4 py-4">
-                            <h4>Scholarship Three</h4>    
-                            <p>Description</p>
-                        </div>
+                        { scholDataLoaded &&
+                            <section>
+                            <article className="">
+                                <ScholTable data={scholData.slice(0,3)}></ScholTable>
+                            </article>
+
+                            </section>
+                            }
                     </div>
                 </div>
             </div>

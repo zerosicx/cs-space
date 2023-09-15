@@ -11,6 +11,11 @@ import { Auth } from 'aws-amplify';
 
 export const getSecretAPIKey = async () => {
     const secret_name = "csspace/theMuseAPIKey";
+    
+    // const user = await Auth.currentAuthenticatedUser();
+    // if (!user) {
+    //     return null;
+    // }
 
     const credentials = await getCredentials()
         .then((result) => {
@@ -77,7 +82,6 @@ async function getJWTToken() {
         const user = await Auth.currentAuthenticatedUser();
         const jwt = user.signInUserSession?.idToken?.jwtToken;
         token = jwt;
-
     } catch (error) {
         console.log("Error retrieving JWT Token:", error);
     }

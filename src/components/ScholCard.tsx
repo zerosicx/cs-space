@@ -1,7 +1,7 @@
 import React from 'react'
 import './JobCard.css';
 import './ScholCard.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 type ScholCardProps = {
     title: String,
@@ -19,8 +19,15 @@ const ScholCard: React.FC<ScholCardProps>= ({title, supervisors, description, id
     nav(`/scholarships/scholarship?id=${id}`);
   };
 
+  let colSizeString = "job-card__container col-sm-6 my-2";
+  const [searchParams] = useSearchParams();
+
+  if (searchParams.size === 0){
+    colSizeString = "job-card__container col-sm-12 my-2";
+  }
+
   return (
-    <div className="job-card__container col-sm-6 my-2" onClick={onScholCardClick}>
+    <div className={colSizeString} onClick={onScholCardClick}>
         <div className="card job-card__card">
           <div className="card-body">
             <div className="card-text">
