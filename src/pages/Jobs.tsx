@@ -4,6 +4,7 @@ import Pagination from '../components/Pagination';
 import { nzJobsUrl } from '../utilties/config';
 import loadingImage from '../utilties/loading.gif';
 import { useNavigate } from 'react-router-dom';
+import { getSecretAPIKey } from '../utilties/getSecret';
 
 interface JobsProps {
   loggedIn: boolean
@@ -31,13 +32,13 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
     nav('/login');
   }
   
-
-  useEffect(() => {
+  const getJobsData = async (pageNum: number) => {
     // Define the base URL
     const baseUrl = nzJobsUrl;
 
     // Define the location parameter (you can customize this as needed)
-    const APIKey = process.env.REACT_APP_theMuseAPIKey;
+    const APIKey =  await getSecretAPIKey();
+
     // Create the URL with the pageNumber parameter
     const url = APIKey ? `${baseUrl}&page=${pageNum}&api_key=${APIKey}` : `${baseUrl}&page=${pageNum}`;
 
@@ -70,7 +71,11 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-    }, [pageNum]);
+  }
+
+  useEffect(() => {
+    getJobsData(pageNum);
+  }, [pageNum]);
 
   return (
     <section className="container">
