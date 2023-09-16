@@ -1,64 +1,58 @@
 import React, { useEffect, useState } from 'react'
 import { redirect, useSearchParams } from 'react-router-dom';
-import { csSpaceScholApiUrl } from '../utilties/config';
+import { csSpaceEventApiUrl } from '../utilties/config';
 import { sendAuthenticatedGetRequest } from '../utilties/getSecret';
 
-interface ScholsProps {
+interface EventsProps {
   loggedIn: boolean
 }
 
-const ScholDetails: React.FC<ScholsProps> = ({loggedIn}) => {
+const EventDetails: React.FC<EventsProps> = ({loggedIn}) => {
 
     // Check if the user is authenticated. If not, redirect to login page.
     const [searchParams] = useSearchParams();
     const id = searchParams.get("id");
-    const [ scholData, setScholData ] = useState<any>(null);
-    const [ scholDataLoaded, setScholDataLoaded ] = useState<boolean>(false);
+    const [ eventData, setEventData ] = useState<any>(null);
+    const [ eventDataLoaded, setEventDataLoaded ] = useState<boolean>(false);
 
     if (!loggedIn){
       redirect('/login');
     }
 
-  const getScholDetailsData = async () => {
-    const baseUrl = csSpaceScholApiUrl;
-    const url = `${baseUrl}/scholarships/${id}`;
+  const getEventDetailsData = async () => {
+    const baseUrl = csSpaceEventApiUrl;
+    const url = `${baseUrl}/events/${id}`;
 
     // Make the fetch request
     const data = await sendAuthenticatedGetRequest(url);
-    setScholData(data.Item);
-    setScholDataLoaded(true); 
+    setEventData(data.Item);
+    setEventDataLoaded(true); 
   };
 
   useEffect(() => {
-    getScholDetailsData(); // Call the API when the component mounts
+    getEventDetailsData(); // Call the API when the component mounts
   }, [id]); // Add id as a dependency to trigger the API call when it changes
 
   return (
     <div className="container mb-5">
-        { scholDataLoaded &&
+        { eventDataLoaded &&
             <>
             <section className="row">
                 <article className="col col-sm-12 description bg-white my-1">
                    <div className="container-fluid card my-4 h-auto bg-light p-5">
                     <div className="">
-                      <h1 className="display-4 mt-4 mb-3 text-primary">{scholData["Title"]}</h1>
+                      <h1 className="display-4 mt-4 mb-3 text-primary">{eventData["Title"]}</h1>
                     </div>
                         <h3>Details</h3>
                         <h4 className="text-danger py-2"> University of Waikato </h4>
-                        <p><a className="card-link" href={scholData["Link"]}>Read more here</a></p>
+                        <p><a className="card-link" href={eventData["Link"]}>Read more here</a></p>
                         
-                        <p><b>Supervisor(s):</b></p>
-                        <br/>
-                        {
-                            scholData["Supervisor/s"].split(",").map((sup: any, index: number) => {
-                                return <span className=" w-25 badge rounded-pill bg-secondary text-light" key={index}>{sup}</span>
-                            })
-                        }
+                        
                         
                     </div>
                     <h1 className="text-primary" >Description</h1>
                     <div>
-                      {scholData["Description"]}
+                      {eventData["Description"]}
                     </div>
                 </article>
             </section>
@@ -68,4 +62,4 @@ const ScholDetails: React.FC<ScholsProps> = ({loggedIn}) => {
   )
 }
 
-export default ScholDetails
+export default EventDetails;

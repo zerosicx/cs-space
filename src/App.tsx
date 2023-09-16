@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import About from './pages/About';
 import Jobs from './pages/Jobs';
-import Hackathons from './pages/Hackathons';
+import Events from './pages/Events';
 import Scholarships from './pages/Scholarships';
 import NavBar from './components/NavBar';
 import Login from './pages/Login';
@@ -39,7 +39,7 @@ function App() {
         <Route path="/" element={<Home loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} />
         <Route path="/about" element={<About />} />
         <Route path="/jobs" element={<Jobs loggedIn={loggedIn}/>} />
-        <Route path="/hackathons" element={<Hackathons loggedIn={loggedIn}/>} />
+        <Route path="/events" element={<Events loggedIn={loggedIn}/>} />
         <Route path="/scholarships" element={<Scholarships loggedIn={loggedIn}/>} />
         <Route path="/login" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
         <Route path="/jobs/:id" element={<JobDetails loggedIn={false} />}/>

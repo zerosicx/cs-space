@@ -1,4 +1,5 @@
 export const nzJobsUrl = 'https://www.themuse.com/api/public/jobs?level=Entry%20Level&level=Internship&location=Auckland%2C%20New%20Zealand&location=Blenheim%2C%20New%20Zealand&location=Cambridge%2C%20New%20Zealand&location=Christchurch%2C%20New%20Zealand&location=Dunedin%2C%20New%20Zealand&location=Gisborne%2C%20New%20Zealand&location=Hamilton%2C%20New%20Zealand&location=Hastings%2C%20New%20Zealand&location=Invercargill%2C%20New%20Zealand&location=Levin%2C%20New%20Zealand&location=Masterton%2C%20New%20Zealand&location=Napier%2C%20New%20Zealand&location=Nelson%2C%20New%20Zealand&location=New%20Plymouth%2C%20New%20Zealand&location=Palmerston%20North%2C%20New%20Zealand&location=Papakura%2C%20New%20Zealand&location=Rotorua%2C%20New%20Zealand&location=Sydney%2C%20Australia&location=Taupo%2C%20New%20Zealand&location=Tauranga%2C%20New%20Zealand&location=Wellington%2C%20New%20Zealand';
 export const jobDetailBaseUrl = 'https://www.themuse.com/api/public/jobs';
-export const csSpaceBackendApiUrl = 'https://fqefow8pv0.execute-api.us-east-1.amazonaws.com';
+export const csSpaceScholApiUrl = 'https://fqefow8pv0.execute-api.us-east-1.amazonaws.com';
+export const csSpaceEventApiUrl = 'https://tzdk4mpttl.execute-api.us-east-1.amazonaws.com';
 export const getCredentialsUrl = 'https://0n60cjxpn7.execute-api.us-east-1.amazonaws.com/default/getTemporaryCredentialsForSecret';

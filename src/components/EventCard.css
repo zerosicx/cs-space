@@ -1,0 +1,8 @@
+.line-clamp-text {
+    position: relative;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /* Adjust to set the number of visible lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
