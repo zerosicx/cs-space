@@ -54,20 +54,7 @@ export const getSecretAPIKey = async () => {
 async function getCredentials() {
 
     try {
-        let token = await getJWTToken();
-        const authorizationToken = "Bearer " + token;
-
-        const credentials = await fetch(getCredentialsUrl, {
-            method: 'GET',
-            headers: {
-                Authorization: authorizationToken ? authorizationToken : ""
-            }
-        })
-            .then((response) => response.json())
-            .then((data) => {
-            return data;
-        });
-
+        const credentials = sendAuthenticatedGetRequest(getCredentialsUrl);
 
         return credentials;
     } catch (e) {
@@ -86,4 +73,21 @@ async function getJWTToken() {
         console.log("Error retrieving JWT Token:", error);
     }
     return token;
+}
+
+export async function sendAuthenticatedGetRequest(url: string){
+    let token = await getJWTToken();
+    const authorizationToken = "Bearer " + token;
+
+    const data = await fetch(url, {
+            method: 'GET',
+            headers: {
+                Authorization: authorizationToken ? authorizationToken : ""
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+            return data;
+        });
+    return data;
 }
