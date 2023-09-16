@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { redirect, useSearchParams } from 'react-router-dom';
 import { csSpaceBackendApiUrl } from '../utilties/config';
+import { sendAuthenticatedGetRequest } from '../utilties/getSecret';
 
 interface ScholsProps {
   loggedIn: boolean
@@ -18,24 +19,19 @@ const ScholDetails: React.FC<ScholsProps> = ({loggedIn}) => {
       redirect('/login');
     }
 
+  const getScholDetailsData = async () => {
+    const baseUrl = csSpaceBackendApiUrl;
+    const url = `${baseUrl}/scholarships/${id}`;
+
+    // Make the fetch request
+    const data = await sendAuthenticatedGetRequest(url);
+    setScholData(data.Item);
+    setScholDataLoaded(true); 
+  };
+
   useEffect(() => {
     // Move the API call inside this useEffect
-    const getScholDetailsData = () => {
-      const baseUrl = csSpaceBackendApiUrl;
-      const url = `${baseUrl}/scholarships/${id}`;
-
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          const results = data["Item"];
-          setScholData(results);
-          setScholDataLoaded(true);
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-          alert(`An error occured. ${error}`);
-        });
-    };
+    
 
     getScholDetailsData(); // Call the API when the component mounts
   }, [id]); // Add id as a dependency to trigger the API call when it changes
