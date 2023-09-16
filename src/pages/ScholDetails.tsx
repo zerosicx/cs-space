@@ -30,9 +30,6 @@ const ScholDetails: React.FC<ScholsProps> = ({loggedIn}) => {
   };
 
   useEffect(() => {
-    // Move the API call inside this useEffect
-    
-
     getScholDetailsData(); // Call the API when the component mounts
   }, [id]); // Add id as a dependency to trigger the API call when it changes
 

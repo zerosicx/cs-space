@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Content.css';
 import JobTable from '../components/JobTable';
 import { csSpaceBackendApiUrl, nzJobsUrl } from '../utilties/config';
-import { getSecretAPIKey } from '../utilties/getSecret';
+import { getSecretAPIKey, sendAuthenticatedGetRequest } from '../utilties/getSecret';
 import loadingImage from '../utilties/loading.gif';
 import ScholTable from './ScholTable';
 
@@ -45,21 +45,17 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
 
     const getScholarshipsData = async () => {
         // Define the base URL
-        const baseUrl = csSpaceBackendApiUrl;
+        if (!loggedIn){
+            return;
+        }
 
+        const baseUrl = csSpaceBackendApiUrl;
         // Create the URL with the pageNumber parameter
         const url = `${baseUrl}/scholarships`;
         // Make the fetch request
-        fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-            const results = data.Items;
-            setScholData(results);
-            setScholDataLoaded(true);
-        })
-        .catch((error) => {
-            console.error('Error fetching data:', error);
-        });
+        const data = await sendAuthenticatedGetRequest(url);
+        setScholData(data.Items);
+        setScholDataLoaded(true);
     }
 
 
@@ -108,9 +104,14 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
                             <article className="">
                                 <ScholTable data={scholData.slice(0,3)}></ScholTable>
                             </article>
-
                             </section>
-                            }
+                        }
+                        {
+                            !scholDataLoaded &&
+                            <div>
+                                <h2>Please sign in to view exclusive content.</h2>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
