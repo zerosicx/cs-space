@@ -5,18 +5,34 @@ import { csSpaceBackendApiUrl, nzJobsUrl } from '../utilties/config';
 import { getSecretAPIKey, sendAuthenticatedGetRequest } from '../utilties/getSecret';
 import loadingImage from '../utilties/loading.gif';
 import ScholTable from './ScholTable';
+import { redirect } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
 
-interface JobsProps {
-    loggedIn: boolean
-}
-
-const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
+const HomeContent = () => {
 
     const [ pageNum ] = useState<number>(1);
     const [ jobsData, setJobsData ] = useState<any[]>([]);
     const [ jobsLoaded, setJobsLoaded ] = useState<boolean>(false);
     const [ scholData, setScholData ] = useState<any[]>([]);
     const [ scholDataLoaded, setScholDataLoaded ] = useState<boolean>(false);
+    const [ loggedIn, setLoggedIn ] = useState<boolean>(false);
+
+    useEffect(() => {
+        const isAuthenticated = async () => {
+        try {
+            const user = await Auth.currentAuthenticatedUser();
+            if (user){
+            setLoggedIn(true);
+            } else {
+            setLoggedIn(false);
+            }
+        } catch (error) {
+            console.log("Problem getting authenticated user.");
+        }
+        };
+
+        isAuthenticated();
+    }, [])
 
     const getJobsData = async () => {
         // Define the base URL
@@ -44,11 +60,11 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
     }
 
     const getScholarshipsData = async () => {
-        // Define the base URL
+
         if (!loggedIn){
             return;
         }
-
+        
         const baseUrl = csSpaceBackendApiUrl;
         // Create the URL with the pageNumber parameter
         const url = `${baseUrl}/scholarships`;
@@ -62,7 +78,7 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
     useEffect(() => {
         getJobsData();
         getScholarshipsData();
-    }, []);
+    }, [loggedIn]);
 
     return (
         <div className='grid-container px-2 py-2'>
@@ -99,7 +115,7 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
                     {/* TODO: Get data from the database (Dynamo DB) */}
                     <h3 className="mt-4 px-4">Scholarships</h3>
                     <div className="listing-card__container col-md-12 col-lg-12 col-sm-12 px-4 my-2">
-                        { scholDataLoaded &&
+                        { loggedIn &&
                             <section>
                             <article className="">
                                 <ScholTable data={scholData.slice(0,3)}></ScholTable>
@@ -107,7 +123,7 @@ const HomeContent: React.FC<JobsProps> = ({loggedIn}) => {
                             </section>
                         }
                         {
-                            !scholDataLoaded &&
+                            !loggedIn &&
                             <div>
                                 <h2>Please sign in to view exclusive content.</h2>
                             </div>
