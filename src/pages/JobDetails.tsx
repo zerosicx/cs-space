@@ -1,4 +1,3 @@
-import { Auth } from 'aws-amplify';
 import React, { useEffect, useState } from 'react'
 import { redirect, useSearchParams } from 'react-router-dom';
 import { jobDetailBaseUrl } from '../utilties/config';
@@ -9,38 +8,20 @@ interface JobsProps {
 
 const JobDetails: React.FC<JobsProps> = ({loggedIn}) => {
 
-    // Check if the user is authenticated. If not, redirect to login page.
-    const [searchParams] = useSearchParams();
-    const id = searchParams.get("id");
-    const [ jobData, setJobData ] = useState<any>(null);
-    const [ jobDataLoaded, setJobDataLoaded ] = useState<boolean>(false);
+  // Check if the user is authenticated. If not, redirect to login page.
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+  const [ jobData, setJobData ] = useState<any>(null);
+  const [ jobDataLoaded, setJobDataLoaded ] = useState<boolean>(false);
 
-    if (!loggedIn){
-      redirect('/login');
-    }
-
-    console.log(`Searching for ${id}`);
-
-    useEffect(() => {
-    const isAuthenticated = async () => {
-      try {
-        const user = await Auth.currentAuthenticatedUser();
-        if (!user){
-            redirect('/login');
-        }
-     } catch (error) {
-        console.log(error);
-      }
-    };
-
-    isAuthenticated();
-  })
+  if (!loggedIn){
+    redirect('/login');
+  }
 
   useEffect(() => {
     // Move the API call inside this useEffect
     const getJobDetailsData = () => {
       const APIKey = process.env.REACT_APP_theMuseAPIKey;
-      console.log(`Searching for ${id}`);
       const baseUrl = jobDetailBaseUrl;
       const url = APIKey ? `${baseUrl}/${id}?api_key=${APIKey}` : `${baseUrl}/${id}`;
 

@@ -10,6 +10,7 @@ import NavBar from './components/NavBar';
 import Login from './pages/Login';
 import { Auth } from 'aws-amplify';
 import JobDetails from './pages/JobDetails';
+import ScholDetails from './pages/ScholDetails';
 
 function App() {
   const [ loggedIn, setLoggedIn ] = useState<boolean>(false);
@@ -24,7 +25,7 @@ function App() {
           setLoggedIn(false);
         }
       } catch (error) {
-        console.log(error);
+        console.log("Problem getting authenticated user.");
       }
     };
 
@@ -41,7 +42,8 @@ function App() {
         <Route path="/hackathons" element={<Hackathons loggedIn={loggedIn}/>} />
         <Route path="/scholarships" element={<Scholarships loggedIn={loggedIn}/>} />
         <Route path="/login" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
-        <Route path="/jobs/:id" element={<JobDetails loggedIn={false} />}/>   
+        <Route path="/jobs/:id" element={<JobDetails loggedIn={false} />}/>
+         <Route path="/scholarships/:id" element={<ScholDetails loggedIn={false} />}/>   
       </Routes>
     </BrowserRouter>
   );

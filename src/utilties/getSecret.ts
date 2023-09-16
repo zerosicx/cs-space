@@ -7,9 +7,11 @@ import {
   GetSecretValueCommand,
 } from "@aws-sdk/client-secrets-manager";
 import { getCredentialsUrl } from "./config";
+import { Auth } from 'aws-amplify';
 
 export const getSecretAPIKey = async () => {
     const secret_name = "csspace/theMuseAPIKey";
+
     const credentials = await getCredentials()
         .then((result) => {
             return result;
@@ -18,6 +20,10 @@ export const getSecretAPIKey = async () => {
             // Handle errors here
             console.error("API Error:", error);
         });
+
+    if (!credentials) {
+        return "";
+    }
 
     const client = new SecretsManagerClient({
         region: "us-east-1",
@@ -42,11 +48,41 @@ export const getSecretAPIKey = async () => {
 
 async function getCredentials() {
 
-    const credentials = await fetch(getCredentialsUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        return data;
-    })
+    try {
+        const credentials = sendAuthenticatedGetRequest(getCredentialsUrl);
 
-    return credentials;
+        return credentials;
+    } catch (e) {
+        console.log("Error:", e);
+    }
+}
+
+async function getJWTToken() {
+    // Inside an async function
+    let token;
+    try {
+        const user = await Auth.currentAuthenticatedUser();
+        const jwt = user.signInUserSession?.idToken?.jwtToken;
+        token = jwt;
+    } catch (error) {
+        console.log("Error retrieving JWT Token:", error);
+    }
+    return token;
+}
+
+export async function sendAuthenticatedGetRequest(url: string){
+    let token = await getJWTToken();
+    const authorizationToken = "Bearer " + token;
+
+    const data = await fetch(url, {
+            method: 'GET',
+            headers: {
+                Authorization: authorizationToken ? authorizationToken : ""
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+            return data;
+        });
+    return data;
 }

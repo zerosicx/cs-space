@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { csSpaceBackendApiUrl } from '../utilties/config';
 import loadingImage from '../utilties/loading.gif';
 import ScholTable from '../components/ScholTable';
+import { sendAuthenticatedGetRequest } from '../utilties/getSecret';
 
 
 interface ScholarshipsProps {
@@ -18,25 +19,22 @@ const Scholarships: React.FC<ScholarshipsProps> = ({loggedIn}) => {
   if (!loggedIn){
     nav('/login');
   }
-  
 
-  useEffect(() => {
+  const getScholarshipsData = async () => {
     // Define the base URL
     const baseUrl = csSpaceBackendApiUrl;
 
     // Create the URL with the pageNumber parameter
     const url = `${baseUrl}/scholarships`;
     // Make the fetch request
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        const results = data.Items;
-        setScholData(results);
-        setScholDataLoaded(true);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
+    const data = await sendAuthenticatedGetRequest(url);
+    setScholData(data.Items);
+    setScholDataLoaded(true);
+  }
+  
+
+  useEffect(() => {
+    getScholarshipsData();
     }, [] );
     
   return (
@@ -59,9 +57,7 @@ const Scholarships: React.FC<ScholarshipsProps> = ({loggedIn}) => {
         }
 
         { !scholDataLoaded &&
-        <div className="d-flex align-items-center">
-          <img className="mx-auto" src={loadingImage} alt="loading gif"></img>
-        </div>
+          <img className="mx-auto w-100" src={loadingImage} alt="loading gif"></img>
         }
       </div> 
       }

@@ -38,8 +38,8 @@
     height: 100vh;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto 1fr;
-    grid-template-areas:'content1 content1 content3'
-                        'content2 content2 content3';
+    grid-template-areas: 'content1 content1 content3'
+        'content2 content2 content3';
     column-gap: 20px;
     row-gap: 20px;
 }
