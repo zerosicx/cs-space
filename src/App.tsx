@@ -37,7 +37,7 @@ function App() {
    <BrowserRouter>
    <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn}></NavBar>
       <Routes>
-        <Route path="/" element={<Home loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/jobs" element={<Jobs loggedIn={loggedIn}/>} />
         <Route path="/events" element={<Events loggedIn={loggedIn}/>} />
