@@ -76,7 +76,7 @@ const NavBar: React.FC<NavBarProps> = ({ loggedIn, setLoggedIn  }) => {
                     <a className='nav-link text-white' href='/jobs'>Jobs</a>
                     </li>
                     <li className='nav-item'>
-                        <a className='nav-link text-white' href='/hackathons'>Hackathons</a>
+                        <a className='nav-link text-white' href='/events'>Events</a>
                     </li>
                     <li className='nav-item'>
                         <a className='nav-link text-white' href='/scholarships'>Scholarships</a>

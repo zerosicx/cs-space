@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Content.css';
 import JobTable from '../components/JobTable';
-import { csSpaceBackendApiUrl, nzJobsUrl } from '../utilties/config';
+import { csSpaceScholApiUrl, nzJobsUrl } from '../utilties/config';
 import { getSecretAPIKey, sendAuthenticatedGetRequest } from '../utilties/getSecret';
 import loadingImage from '../utilties/loading.gif';
 import ScholTable from './ScholTable';
@@ -64,8 +64,7 @@ const HomeContent = () => {
         if (!loggedIn){
             return;
         }
-        
-        const baseUrl = csSpaceBackendApiUrl;
+        const baseUrl = csSpaceScholApiUrl;
         // Create the URL with the pageNumber parameter
         const url = `${baseUrl}/scholarships`;
         // Make the fetch request

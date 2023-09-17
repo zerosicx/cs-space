@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { redirect, useSearchParams } from 'react-router-dom';
-import { csSpaceBackendApiUrl } from '../utilties/config';
+import { csSpaceScholApiUrl } from '../utilties/config';
 import { sendAuthenticatedGetRequest } from '../utilties/getSecret';
 
 interface ScholsProps {
@@ -20,7 +20,7 @@ const ScholDetails: React.FC<ScholsProps> = ({loggedIn}) => {
     }
 
   const getScholDetailsData = async () => {
-    const baseUrl = csSpaceBackendApiUrl;
+    const baseUrl = csSpaceScholApiUrl;
     const url = `${baseUrl}/scholarships/${id}`;
 
     // Make the fetch request
