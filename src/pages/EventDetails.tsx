@@ -43,8 +43,8 @@ const EventDetails: React.FC<EventsProps> = ({loggedIn}) => {
                     <div className="">
                       <h1 className="display-4 mt-4 mb-3 text-primary">{eventData["Title"]}</h1>
                     </div>
-                        <h3>Details</h3>
-                        <h4 className="text-danger py-2"> University of Waikato </h4>
+                        <h3>Date</h3>
+                        <p>{eventData["Date"]}</p>
                         <p><a className="card-link" href={eventData["Link"]}>Read more here</a></p> 
                     </div>
                     <h1 className="text-primary" >Description</h1>
