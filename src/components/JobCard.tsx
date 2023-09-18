@@ -2,16 +2,17 @@ import React from 'react'
 import './JobCard.css';
 import { useNavigate } from 'react-router-dom';
 
-type Props = {
+interface JobCardProps {
     name: String,
     id: number,
     locations: any[],
-    company: String
+    company: String,
+    homePage: boolean
 }
 
-const JobCard = (props: Props) => {
-  const { name, id, locations, company} = props;
+const JobCard: React.FC<JobCardProps> = ({ name, id, locations, company, homePage}) => {
   const nav = useNavigate();
+  let colSizeString = "job-card__container col-sm-6 my-2";
 
   // When the divider is clicked, redirect the user to the job details page.
   const onJobCardClick = () => {
@@ -19,8 +20,12 @@ const JobCard = (props: Props) => {
     nav(`/jobs/job?id=${id}`);
   };
 
+  if (homePage){
+    colSizeString = "job-card__container col-sm-12 my-2";
+  }
+
   return (
-    <div className="job-card__container col-sm-6 my-2">
+    <div className={colSizeString}>
             <div className="card job-card__card" onClick={onJobCardClick}>
               <div className="card-body">
                 <h5 className="card-title">{name}</h5>
