@@ -5,7 +5,6 @@ import { csSpaceScholApiUrl, nzJobsUrl } from '../utilties/config';
 import { getSecretAPIKey, sendAuthenticatedGetRequest } from '../utilties/getSecret';
 import loadingImage from '../utilties/loading.gif';
 import ScholTable from './ScholTable';
-import { redirect } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 
 const HomeContent = () => {
@@ -14,7 +13,7 @@ const HomeContent = () => {
     const [ jobsData, setJobsData ] = useState<any[]>([]);
     const [ jobsLoaded, setJobsLoaded ] = useState<boolean>(false);
     const [ scholData, setScholData ] = useState<any[]>([]);
-    const [ scholDataLoaded, setScholDataLoaded ] = useState<boolean>(false);
+    const [ , setScholDataLoaded ] = useState<boolean>(false);
     const [ loggedIn, setLoggedIn ] = useState<boolean>(false);
 
     useEffect(() => {
@@ -103,7 +102,7 @@ const HomeContent = () => {
                         <div className="">
                             { jobsLoaded &&
                             <article className="">
-                                <JobTable data={jobsData.slice(0,3)} showJobFilter={false}></JobTable>
+                                <JobTable data={jobsData.slice(0,3)} showJobFilter={false} homePage={true}></JobTable>
                             </article>
                             }
                             { !jobsLoaded &&
@@ -122,7 +121,7 @@ const HomeContent = () => {
                         { loggedIn &&
                             <section>
                             <article className="">
-                                <ScholTable data={scholData.slice(0,3)}></ScholTable>
+                                <ScholTable data={scholData.slice(0,3)} homePage={true}></ScholTable>
                             </article>
                             </section>
                         }

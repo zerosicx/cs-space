@@ -90,7 +90,7 @@ const Jobs: React.FC<JobsProps>= ({loggedIn}) => {
         { jobsLoaded &&
         <section>
           <article className="">
-            <JobTable data={jobsData} showJobFilter={true}></JobTable>
+            <JobTable data={jobsData} showJobFilter={true} homePage={false}></JobTable>
           </article>
 
           <article>

@@ -50,7 +50,7 @@ const Scholarships: React.FC<ScholarshipsProps> = ({loggedIn}) => {
         { scholDataLoaded &&
         <section>
           <article className="">
-            <ScholTable data={scholData}></ScholTable>
+            <ScholTable data={scholData} homePage={false}></ScholTable>
           </article>
 
         </section>

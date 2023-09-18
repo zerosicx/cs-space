@@ -4,10 +4,11 @@ import SearchAndFilter, { Filters } from './SearchFilter';
 
 type JobTableProps = {
     data: any
-    showJobFilter: boolean
+    showJobFilter: boolean,
+    homePage: boolean
 }
 
-const JobTable: React.FC<JobTableProps> = ({data, showJobFilter}) => {
+const JobTable: React.FC<JobTableProps> = ({data, showJobFilter, homePage}) => {
     const [, setFilterText] = useState<Filters>(); // Add a state for filtering
 
 
@@ -30,7 +31,7 @@ const JobTable: React.FC<JobTableProps> = ({data, showJobFilter}) => {
         }
             <div className="row">
                 {data.map((job: any, index: number) => (
-                    <JobCard name={job.name} id={job.id} locations={job.locations} company={job.company.name} key={index}></JobCard>
+                    <JobCard name={job.name} id={job.id} locations={job.locations} company={job.company.name} homePage={homePage} key={index}></JobCard>
                 ))}
             </div>
         </>
