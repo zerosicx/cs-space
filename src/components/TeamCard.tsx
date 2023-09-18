@@ -20,7 +20,7 @@ const TeamCard = (props: Props) => {
                         <h4>{name}</h4>
                         <p><i>{title}</i></p>
                         <div className='team-icon'>
-                            <a href={`${linkedin}`} target='_blank' className='linkedin'>
+                            <a href={`${linkedin}`} className='linkedin'>
                                 <i className='fa fa-linkedin'></i>
                             </a>
                         </div>
