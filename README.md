@@ -7,8 +7,11 @@ Given its target audience of University of Waikato students, user registration a
 
 # Getting Started
 Download the dependencies: `npm install`
+
 Pull the amplify environment: `amplify pull --appId d2h0rztbstrxz2 --envName main`
+
 - Note: you must make sure you have the 555-aws-amplify credentials added to your .aws folder configurations. This instruction will not be added here for safety.
+
 Run the application local: `npm start`
 
 # Notes
