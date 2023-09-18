@@ -82,11 +82,16 @@ const HomeContent = () => {
     return (
         <div className='grid-container px-2 py-2'>
             <div className='content1 centred'>   
-                <div className="content-card px-3 py-3">
+                <div className="content-card col-sm-12 px-3 py-3">
                     <p>A place to search for opportunities in computer science and the IT field</p>
-                    <a href='/jobs'>
-                        <button className='find-button'>Find a job</button>
-                    </a>        
+                    { 
+                        loggedIn && <a href='/jobs'>
+                        <button className='find-button'>Find a job</button></a>
+                    }
+                    {
+                        !loggedIn && <a href='/login'>
+                        <button className='find-button'>Find a job</button></a>
+                    }
                 </div>
             </div>
             <div className='content2 col'>   
@@ -102,7 +107,7 @@ const HomeContent = () => {
                             </article>
                             }
                             { !jobsLoaded &&
-                                    <img className="w-100" src={loadingImage} alt="loading gif"></img>
+                                <img className="w-100" src={loadingImage} alt="loading gif"></img>
                             }
                         </div> 
                     }
